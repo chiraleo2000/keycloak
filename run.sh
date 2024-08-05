@@ -1,0 +1,1 @@
+docker run -d -p 80:8083 --name authorization-server-container authorization-server

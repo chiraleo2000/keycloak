@@ -1,0 +1,13 @@
+com/baeldung/authserver/config/EmbeddedKeycloakRequestFilter.class
+com/baeldung/authserver/config/KeycloakServerProperties.class
+META-INF/spring-configuration-metadata.json
+com/baeldung/authserver/config/SimplePlatformProvider$1.class
+com/baeldung/authserver/config/KeycloakServerProperties$AdminUser.class
+com/baeldung/authserver/config/EmbeddedKeycloakConfig$1.class
+com/baeldung/authserver/config/RegularJsonConfigProviderFactory.class
+com/baeldung/authserver/AuthorizationServerApp.class
+com/baeldung/authserver/config/EmbeddedKeycloakConfig.class
+com/baeldung/authserver/config/EmbeddedKeycloakApplication.class
+com/baeldung/authserver/config/Resteasy3Provider.class
+com/baeldung/authserver/config/SimplePlatformProvider.class
+com/baeldung/authserver/config/EmbeddedKeycloakRequestFilter$1.class
