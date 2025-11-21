@@ -20,7 +20,7 @@
   "actionTokenGeneratedByUserLifespan" : 300,
   "enabled" : true,
   "sslRequired" : "external",
-  "registrationAllowed" : false,
+  "registrationAllowed" : true,
   "registrationEmailAsUsername" : false,
   "rememberMe" : false,
   "verifyEmail" : false,
@@ -62,8 +62,7 @@
       "attributes" : { }
     } ],
     "client" : {
-      "fooClient" : [ ],
-      "barClient" : [ ],
+      "jwtClient" : [ ],
       "realm-management" : [ {
         "id" : "5d00243f-ceec-4b0c-995e-d86d5b8a0ae6",
         "name" : "view-clients",
@@ -303,7 +302,8 @@
     "totp" : false,
     "emailVerified" : false,
     "attributes" : {
-      "organization" : "baeldung"
+      "organization" : "baeldung",
+      "DOB" : "1984-07-01"
     },
     "credentials" : [ {
       "id" : "024b62f1-3af0-49fc-a15f-e843b72e00df",
@@ -430,12 +430,12 @@
     "optionalClientScopes" : [ "address", "phone", "offline_access", "microprofile-jwt" ]
   }, {
     "id" : "b88ce206-63d6-43b6-87c9-ea09d8c02f32",
-    "clientId" : "fooClient",
+    "clientId" : "jwtClient",
     "surrogateAuthRequired" : false,
     "enabled" : true,
     "clientAuthenticatorType" : "client-secret",
-    "secret" : "fooClientSecret",
-    "redirectUris" : [ "http://localhost:8080/" ],
+    "secret" : "jwtClientSecret",
+    "redirectUris" : [ "http://localhost:8084/" ],
     "webOrigins" : [ "+" ],
     "notBefore" : 0,
     "bearerOnly" : false,
@@ -466,6 +466,21 @@
     "fullScopeAllowed" : true,
     "nodeReRegistrationTimeout" : -1,
     "protocolMappers": [
+    	{
+          "id": "c5237a00-d3ea-4e87-9caf-5146b02d1a15",
+          "name": "DOB",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "userinfo.token.claim": "true",
+            "user.attribute": "DOB",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "DOB",
+            "jsonType.label": "String"
+          }
+        },
         {
           "id": "06e5fc8f-3553-4c75-aef4-5a4d7bb6c0d1",
           "name": "organization",
@@ -482,63 +497,7 @@
           }
         }
       ],
-    "defaultClientScopes" : [ "role_list", "profile" ],
-    "optionalClientScopes" : [ "web-origins", "address", "read", "phone", "roles", "offline_access", "microprofile-jwt", "write", "email" ]
-  }, {
-    "id" : "b88ce206-63d6-43b6-87c9-ea09d8c02f44",
-    "clientId" : "barClient",
-    "surrogateAuthRequired" : false,
-    "enabled" : true,
-    "clientAuthenticatorType" : "client-secret",
-    "secret" : "barClientSecret",
-    "redirectUris" : [ "http://localhost:8080/" ],
-    "webOrigins" : [ "+" ],
-    "notBefore" : 0,
-    "bearerOnly" : false,
-    "consentRequired" : false,
-    "standardFlowEnabled" : true,
-    "implicitFlowEnabled" : true,
-    "directAccessGrantsEnabled" : true,
-    "serviceAccountsEnabled" : false,
-    "publicClient" : false,
-    "frontchannelLogout" : false,
-    "protocol" : "openid-connect",
-    "attributes" : {
-      "saml.assertion.signature" : "false",
-      "saml.force.post.binding" : "false",
-      "saml.multivalued.roles" : "false",
-      "saml.encrypt" : "false",
-      "saml.server.signature" : "false",
-      "saml.server.signature.keyinfo.ext" : "false",
-      "exclude.session.state.from.auth.response" : "false",
-      "saml_force_name_id_format" : "false",
-      "saml.client.signature" : "false",
-      "tls.client.certificate.bound.access.tokens" : "false",
-      "saml.authnstatement" : "false",
-      "display.on.consent.screen" : "false",
-      "saml.onetimeuse.condition" : "false"
-    },
-    "authenticationFlowBindingOverrides" : { },
-    "fullScopeAllowed" : true,
-    "nodeReRegistrationTimeout" : -1,
-    "protocolMappers": [
-        {
-          "id": "06e5fc8f-3553-4c75-aef4-5a4d7bb6c0c1",
-          "name": "organization",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usermodel-attribute-mapper",
-          "consentRequired": false,
-          "config": {
-            "userinfo.token.claim": "true",
-            "user.attribute": "organization",
-            "id.token.claim": "true",
-            "access.token.claim": "true",
-            "claim.name": "organization",
-            "jsonType.label": "String"
-          }
-        }
-      ],
-    "defaultClientScopes" : [ "role_list", "profile" ],
+    "defaultClientScopes" : [ "role_list", "profile", "openid" ],
     "optionalClientScopes" : [ "web-origins", "address", "read", "phone", "roles", "offline_access", "microprofile-jwt", "write", "email" ]
   }, {
     "id" : "6a4bfbd0-576d-4778-af56-56f876647355",
@@ -977,6 +936,14 @@
       "display.on.consent.screen" : "true"
     }
   }, {
+    "id" : "c1a2eb23-25c6-4be7-a791-ffdca99c83f7",
+    "name" : "openid",
+    "protocol" : "openid-connect",
+    "attributes" : {
+      "include.in.token.scope" : "true",
+      "display.on.consent.screen" : "true"
+    }
+  },{
     "id" : "18e141bf-dabe-4858-879c-dbc439cdead4",
     "name" : "role_list",
     "description" : "SAML role list",
@@ -1080,6 +1047,8 @@
     "strictTransportSecurity" : "max-age=31536000; includeSubDomains"
   },
   "smtpServer" : { },
+  "accountTheme": "custom",
+  "loginTheme": "custom",
   "eventsEnabled" : false,
   "eventsListeners" : [ "jboss-logging" ],
   "enabledEventTypes" : [ ],
@@ -1186,7 +1155,7 @@
             "true"
           ],
           "keystore": [
-            "src/main/resources/mytest.jks"
+            "mytest.jks"
           ],
           "priority": [
             "101"

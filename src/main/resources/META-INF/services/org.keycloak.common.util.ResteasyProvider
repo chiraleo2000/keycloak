@@ -1,1 +1,1 @@
-com.baeldung.authserver.config.Resteasy3Provider
+com.baeldung.jwt.config.Resteasy3Provider

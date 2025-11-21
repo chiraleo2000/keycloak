@@ -1,1 +1,1 @@
-com.baeldung.authserver.config.SimplePlatformProvider
+com.baeldung.jwt.config.SimplePlatformProvider

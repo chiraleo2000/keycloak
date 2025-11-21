@@ -1,17 +1,22 @@
-FROM openjdk:17-jdk-alpine
+# Start with an OpenJDK base image with JDK 17
+FROM openjdk:17-jdk-slim
 
+# Set the working directory
 WORKDIR /app
 
-ARG APP_VERSION
+# Copy the jar file to the working directory
+COPY target/jwt-auth-server-0.1.0-SNAPSHOT.jar /app/app.jar
 
-ADD authorization-server-0.1.0-SNAPSHOT.jar App.jar
+# Copy the application.yml and keycloak-server.json to the appropriate directory
+COPY src/main/resources/application.prod.yml /app/application.yml
+COPY src/main/resources/baeldung-realm.json /app/baeldung-realm.json
+COPY src/main/resources/META-INF/keycloak-server.json /app/META-INF/keycloak-server.json
+COPY src/main/resources/mytest.jks /app/mytest.jks
 
-COPY target/ .
-
-COPY target/mytest.jks src/main/resources/mytest.jks
-
-#COPY themes/ src/main/resources/themes/
+# The port your application runs on
+EXPOSE 8083
 
 ENV JAVA_OPTS="-Dserver.forward-headers-strategy=native"
 
-CMD ["java", "-jar", "App.jar"]
+# Set the entrypoint to run your jar file with JAVA_OPTS
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.jar"]

@@ -1,0 +1,2 @@
+com.baeldung.jwt.custom.CustomUserStorageProviderFactory
+com.baeldung.jwt.custom.RegisterUserStorageProviderFactory

@@ -1,1 +1,1 @@
-docker run -d -p 80:8083 --name authorization-server-container authorization-server
+mvn spring-boot:run -Dspring-boot.run.arguments=--spring.config.location=classpath:/application-uat.yml

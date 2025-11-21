@@ -3,13 +3,22 @@ server:
 
 spring:
   datasource:
-    username: sa
-    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:oracle:thin:@192.168.0.77:1522:ssodb
+    username: SAO_REG_KEYCLOAK
+    password: SAO_REG_KEYCLOAK
+    driverClassName: oracle.jdbc.OracleDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.Oracle12cDialect
 
 keycloak:
   server:
     contextPath: /auth
     adminUser:
-      username: bael-admin
-      password: pass
-    realmImportFile: prod-realm.json
+      username: superadmin
+      password: office@betimes.Biz
+    realmImportFile: baeldung-realm.json

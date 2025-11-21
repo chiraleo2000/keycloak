@@ -182,16 +182,16 @@
         "cacheTemplates": "${keycloak.theme.cacheTemplates:}",
         "cacheThemes": "${keycloak.theme.cacheThemes:}",
         "folder": {
-            "dir": "${keycloak.theme.dir:src/main/resources/themes/}"
+            "dir": "${keycloak.theme.dir:themes}"
         }
     },
     "connectionsJpa": {
         "default": {
-            "url": "${keycloak.connectionsJpa.url:jdbc:mysql://172.16.4.4:3306/sao_keycloak?useUnicode=yes&characterEncoding=UTF-8}",
-            "driver": "${keycloak.connectionsJpa.driver:com.mysql.jdbc.Driver}",
-            "driverDialect": "${keycloak.connectionsJpa.driverDialect:}",
-            "user": "${keycloak.connectionsJpa.user:root}",
-            "password": "${keycloak.connectionsJpa.password:P@ssw0rd}",
+            "url": "${keycloak.connectionsJpa.url:jdbc:oracle:thin:@172.16.4.99:1521:saodb}",
+            "driver": "${keycloak.connectionsJpa.driver:oracle.jdbc.OracleDriver}",
+            "driverDialect": "${keycloak.connectionsJpa.driverDialect:org.hibernate.dialect.Oracle12cDialect}",
+            "user": "${keycloak.connectionsJpa.user:SAO_REG_KEYCLOAK}",
+            "password": "${keycloak.connectionsJpa.password:SAO_REG_KEYCLOAK}",
             "showSql": "${keycloak.connectionsJpa.showSql:}",
             "formatSql": "${keycloak.connectionsJpa.formatSql:}",
             "globalStatsInterval": "${keycloak.connectionsJpa.globalStatsInterval:}"

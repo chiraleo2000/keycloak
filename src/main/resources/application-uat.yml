@@ -1,0 +1,24 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@172.16.4.99:1521:saodb
+    username: SAO_REG_KEYCLOAK
+    password: SAO_REG_KEYCLOAK
+    driverClassName: oracle.jdbc.OracleDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.Oracle12cDialect
+
+keycloak:
+  server:
+    contextPath: /auth
+    adminUser:
+      username: superadmin
+      password: office@betimes.Biz
+    realmImportFile: sao-tsea-realm.json

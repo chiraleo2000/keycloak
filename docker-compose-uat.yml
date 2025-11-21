@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  jwt-auth-server:
+    image: jwt-auth-server:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-uat
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - PROXY_ADDRESS_FORWARDING=true
+      - JAVA_OPTS=-Dserver.forward-headers-strategy=native
+    volumes:
+      - ./logs:/app/logs
+      - ./src/main/resources/themes:/app/themes
+    restart: always
+
+networks:
+  bridge:
+    driver: bridge
